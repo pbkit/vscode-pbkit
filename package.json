@@ -1,0 +1,26 @@
+{
+  "name": "vscode-pbkit",
+  "displayName": "Pbkit",
+  "description": "Visual Studio Code plugin for Protobuf",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "proto",
+        "extensions": [".proto"],
+        "aliases": ["Protocol Buffers"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "proto",
+        "scopeName": "source.proto",
+        "path": "./syntaxes/proto.tmLanguage.json"
+      }
+    ]
+  }
+}
