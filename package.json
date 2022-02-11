@@ -25,5 +25,9 @@
         "path": "./syntaxes/proto.tmLanguage.json"
       }
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbkit/vscode-pbkit.git"
   }
 }
