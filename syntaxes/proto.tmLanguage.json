@@ -467,6 +467,9 @@
       "patterns": [
         {
           "include": "#field-statement"
+        },
+        {
+          "include": "#comment"
         }
       ]
     },
