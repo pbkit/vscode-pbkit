@@ -149,6 +149,9 @@
           "include": "#field-statement"
         },
         {
+          "include": "#field-oneof"
+        },
+        {
           "include": "#message"
         },
         {
@@ -397,6 +400,32 @@
         {
           "name": "entity.name.type.option.value.proto",
           "match": "\\b[a-zA-Z0-9\\-\\_]+\\b"
+        }
+      ]
+    },
+    "field-oneof": {
+      "name": "statement.field-oneof.proto",
+      "begin": "\\b(oneof)\\s+([a-zA-Z0-9\\-\\_]+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.oneof.proto"
+        },
+        "2": {
+          "name": "entity.name.type.oneof.proto"
+        },
+        "3": {
+          "name": "punctuation.definition.extend.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.extend.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field-statement"
         }
       ]
     },
