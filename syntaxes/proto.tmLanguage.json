@@ -6,6 +6,9 @@
       "include": "#syntax"
     },
     {
+      "include": "#import"
+    },
+    {
       "include": "#package"
     },   
     {
@@ -47,7 +50,25 @@
       ]
     },
     "import": {
-
+      "name": "meta.import.proto",
+      "begin": "\\b(import)\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.import.proto"
+        }
+      },
+      "end": "\\;",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.proto"
+        }
+      },
+      "contentName": "meta.import.value.proto",
+      "patterns": [
+        {
+          "include": "#qstring-double"
+        }
+      ]
     },
     "package": {
       "name": "meta.package.proto",
@@ -287,7 +308,7 @@
     },
     "field-statement": {
       "name": "statement.field.proto",
-      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_]+))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
+      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
       "beginCaptures": {
         "1": {
           "name": "keyword.field.type.proto"
