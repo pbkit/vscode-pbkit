@@ -15,6 +15,9 @@
       "include": "#message"
     },
     {
+      "include": "#field-extends"
+    },
+    {
       "include": "#option"
     },
     {
@@ -150,6 +153,9 @@
         },
         {
           "include": "#field-statement"
+        },
+        {
+          "include": "#field-extends"
         },
         {
           "include": "#field-oneof"
@@ -452,6 +458,32 @@
           "name": "constant.numeric.proto"
         },
         "6": {
+          "name": "punctuation.definition.extend.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.extend.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field-statement"
+        }
+      ]
+    },
+    "field-extends": {
+      "name": "statement.field-extends.proto",
+      "begin": "\\b(extend)\\s+([a-zA-Z0-9\\-\\_]+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.extend.proto"
+        },
+        "2": {
+          "name": "entity.name.type.extend.proto"
+        },
+        "3": {
           "name": "punctuation.definition.extend.begin.proto"
         }
       },
