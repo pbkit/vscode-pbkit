@@ -149,6 +149,9 @@
           "include": "#comment"
         },
         {
+          "include": "#option"
+        },
+        {
           "include": "#field-group"
         },
         {
