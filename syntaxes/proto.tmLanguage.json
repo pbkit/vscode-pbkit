@@ -6,13 +6,22 @@
       "include": "#syntax"
     },
     {
+      "include": "#import"
+    },
+    {
       "include": "#package"
     },   
     {
       "include": "#message"
     },
     {
+      "include": "#field-extends"
+    },
+    {
       "include": "#option"
+    },
+    {
+      "include": "#service"
     },
     {
       "include": "#enum"
@@ -47,7 +56,25 @@
       ]
     },
     "import": {
-
+      "name": "meta.import.proto",
+      "begin": "\\b(import)\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.import.proto"
+        }
+      },
+      "end": "\\;",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.proto"
+        }
+      },
+      "contentName": "meta.import.value.proto",
+      "patterns": [
+        {
+          "include": "#qstring-double"
+        }
+      ]
     },
     "package": {
       "name": "meta.package.proto",
@@ -125,7 +152,19 @@
           "include": "#comment"
         },
         {
+          "include": "#option"
+        },
+        {
+          "include": "#field-group"
+        },
+        {
           "include": "#field-statement"
+        },
+        {
+          "include": "#field-extends"
+        },
+        {
+          "include": "#field-oneof"
         },
         {
           "include": "#message"
@@ -203,7 +242,33 @@
       ]
     },
     "service": {
-
+      "name": "statement.service.proto",
+      "begin": "\\b(service)\\b\\s*([a-zA-Z0-9\\-\\_]+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.service.proto"
+        },
+        "2": {
+          "name": "entity.name.type.service.proto"
+        },
+        "3": {
+          "name": "punctuation.definition.service.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.service.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#rpc-method"
+        }
+      ]
     },
     "empty": {
 
@@ -287,7 +352,7 @@
     },
     "field-statement": {
       "name": "statement.field.proto",
-      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_]+))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
+      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
       "beginCaptures": {
         "1": {
           "name": "keyword.field.type.proto"
@@ -379,6 +444,96 @@
         }
       ]
     },
+    "field-oneof": {
+      "name": "statement.field-oneof.proto",
+      "begin": "\\b(oneof)\\s+([a-zA-Z0-9\\-\\_]+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.oneof.proto"
+        },
+        "2": {
+          "name": "entity.name.type.oneof.proto"
+        },
+        "3": {
+          "name": "punctuation.definition.extend.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.extend.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field-statement"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "field-group": {
+      "name": "statement.field-group.proto",
+      "begin": "\\b(required|optional|repeated)?\\s*(group)\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*(\\d+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.group.type.proto"
+        },
+        "2": {
+          "name": "keyword.group.proto"
+        },
+        "3": {
+          "name": "entity.name.type.group.proto"
+        },
+        "4": {
+          "name": "punctuation.separator.key-value.proto"
+        },
+        "5": {
+          "name": "constant.numeric.proto"
+        },
+        "6": {
+          "name": "punctuation.definition.extend.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.extend.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field-statement"
+        }
+      ]
+    },
+    "field-extends": {
+      "name": "statement.field-extends.proto",
+      "begin": "\\b(extend)\\s+([a-zA-Z0-9\\-\\_]+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.extend.proto"
+        },
+        "2": {
+          "name": "entity.name.type.extend.proto"
+        },
+        "3": {
+          "name": "punctuation.definition.extend.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.extend.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field-statement"
+        }
+      ]
+    },
     "field-extensions": {
       "name": "statement.field-extensions.proto",
       "begin": "\\b(extensions)\\b",  
@@ -407,6 +562,39 @@
           "match": "max"
         }
       ]
+    },
+    "rpc-method": {
+      "name": "statement.rpc-method.proto",
+      "match": "\\b(rpc)\\s+([0-9a-zA-Z\\-\\_]+)\\s*(\\()\\s*([a-zA-Z0-9\\-\\_\\.]+)\\s*(\\))\\s*(returns)\\s*(\\()\\s*([a-zA-Z0-9\\-\\_\\.]+)\\s*(\\))\\s*(\\;)",
+      "captures": {
+        "1": {
+          "name": "keyword.rpc.proto"
+        },
+        "2": {
+          "name": "entity.name.function.rpc.proto"
+        },
+        "3": {
+          "name": "punctuation.definition.parameters.begin.proto"
+        },
+        "4": {
+          "name": "entity.name.type.request.proto"
+        },
+        "5": {
+          "name": "punctuation.definition.parameters.end.proto"
+        },
+        "6": {
+          "name": "keyword.returns.proto"
+        },
+        "7": {
+          "name": "punctuation.definition.parameters.begin.proto"
+        },
+        "8": {
+          "name": "entity.name.type.response.proto"
+        },
+        "9": {
+          "name": "punctuation.definition.parameters.end.proto"
+        }
+      }
     }
   },
   "scopeName": "source.proto"
