@@ -146,6 +146,9 @@
           "include": "#comment"
         },
         {
+          "include": "#field-group"
+        },
+        {
           "include": "#field-statement"
         },
         {
@@ -414,6 +417,41 @@
           "name": "entity.name.type.oneof.proto"
         },
         "3": {
+          "name": "punctuation.definition.extend.begin.proto"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.extend.end.proto"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field-statement"
+        }
+      ]
+    },
+    "field-group": {
+      "name": "statement.field-group.proto",
+      "begin": "\\b(required|optional|repeated)?\\s*(group)\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*(\\d+)\\s*(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.group.type.proto"
+        },
+        "2": {
+          "name": "keyword.group.proto"
+        },
+        "3": {
+          "name": "entity.name.type.group.proto"
+        },
+        "4": {
+          "name": "punctuation.separator.key-value.proto"
+        },
+        "5": {
+          "name": "constant.numeric.proto"
+        },
+        "6": {
           "name": "punctuation.definition.extend.begin.proto"
         }
       },
