@@ -9,12 +9,20 @@
   "engines": {
     "vscode": "^1.51.0"
   },
+  "activationEvents": [
+    "onLanguage:proto"
+  ],
+  "main": "./dist/main",
   "contributes": {
     "languages": [
       {
         "id": "proto",
-        "extensions": [".proto"],
-        "aliases": ["Protocol Buffers"],
+        "extensions": [
+          ".proto"
+        ],
+        "aliases": [
+          "Protocol Buffers"
+        ],
         "configuration": "./language-configuration.json"
       }
     ],
@@ -24,10 +32,43 @@
         "scopeName": "source.proto",
         "path": "./syntaxes/proto.tmLanguage.json"
       }
-    ]
+    ],
+    "commands": [
+      {
+        "command": "pbkit.restart",
+        "title": "Restart Protobuf Language Server",
+        "category": "Pbkit",
+        "description": "Restart the Protobuf language server."
+      }
+    ],
+    "configuration": {
+			"type": "object",
+			"title": "Example configuration",
+			"properties": {
+				"pbkit-language-server.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "verbose",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+			}
+		}
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pbkit/vscode-pbkit.git"
+  "scripts": {
+    "build": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.17",
+    "@types/vscode": "^1.64.0",
+    "esbuild": "^0.14.21",
+    "vscode-test": "^1.6.1"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^7.0.0"
   }
 }
