@@ -354,7 +354,7 @@
     },
     "field-statement": {
       "name": "statement.field.proto",
-      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
+      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+)|(?:(map)\\s*(<)\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s*(,)\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s*(>)))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
       "beginCaptures": {
         "1": {
           "name": "keyword.field.type.proto"
@@ -366,12 +366,36 @@
           "name": "entity.name.type.field.proto"
         },
         "4": {
-          "name": "variable.name.field.proto"
+          "name": "keyword.map.proto"
         },
         "5": {
-          "name": "punctuation.separator.key-value.proto"
+          "name": "punctuation.start.map.proto"
         },
         "6": {
+          "name": "support.type.field.proto"
+        },
+        "7": {
+          "name": "entity.name.type.field.proto"
+        },
+        "8": {
+          "name": "punctuation.separator.map.proto"
+        },
+        "9": {
+          "name": "support.type.field.proto"
+        },
+        "10": {
+          "name": "entity.name.type.field.proto"
+        },
+        "11": {
+          "name": "punctuation.end.map.proto"
+        },
+        "12": {
+          "name": "variable.name.field.proto"
+        },
+        "13": {
+          "name": "punctuation.separator.key-value.proto"
+        },
+        "14": {
           "name": "constant.numeric.proto"
         }
       },
