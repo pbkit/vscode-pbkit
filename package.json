@@ -1,7 +1,7 @@
 {
   "name": "vscode-pbkit",
-  "displayName": "Pbkit",
-  "description": "Protobuf syntax highlight, goto definition(TODO) and autocomplete(TODO).",
+  "displayName": "Protobuf (Protocol Buffers)",
+  "description": "Syntax highlight, Go to definition and Auto completion.",
   "version": "0.0.1",
   "publisher": "pbkit",
   "icon": "pbkit.png",
