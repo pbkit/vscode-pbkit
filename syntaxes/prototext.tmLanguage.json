@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Protocol Buffers Text Format",
+  "patterns": [
+    {
+      "include": "#dictionary"
+    }
+  ],
+  "repository": {
+    "dictionary": {
+      "name": "meta.dictionary.prototext",
+      "begin": "\\b(?:([a-zA-Z]+[a-zA-Z0-9_]*)|([0-9]+))\\s*({)",
+      "beginCaptures": {
+        "1": {
+          "name": "support.type.prototext"
+        },
+        "2": {
+          "name": "support.type.prototext"
+        },
+        "3": {
+          "name": "punctuation.separator.key-value.prototext"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.prototext"
+        }
+      },
+      "contentName": "meta.syntax.value.prototext",
+      "patterns": [
+        {
+          "include": "#kv-pair"
+        },
+        {
+          "include": "#dictionary"
+        }
+      ]
+    },
+    "kv-pair": {
+      "name": "meta.dictionary.pair.prototext",
+      "begin": "\\b(?:([a-zA-Z]+[a-zA-Z0-9_]*)|([0-9]+))\\s*(:)\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.syntax.prototext"
+        },
+        "2": {
+          "name": "keyword.syntax.prototext"
+        },
+        "3": {
+          "name": "punctuation.separator.key-value.prototext"
+        }
+      },
+      "end": "\\n",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.prototext"
+        }
+      },
+      "contentName": "meta.syntax.value.prototext",
+      "patterns": [
+        {          
+          "include": "#qstring-single"
+        },
+        {
+          "include": "#qstring-double"
+        },
+        {
+          "include": "#numeric"
+        },
+        {
+          "include": "#boolean"
+        },
+        {
+          "include": "#enum"
+        }
+      ]
+    },
+    "boolean": {
+      "name": "constant.language.boolean.prototext",
+      "match": "(true)|(false)"
+    },
+    "qstring-single": {
+      "name": "string.quoted.single.prototext",
+      "match": "'(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^'\\0\\n\\\\])*'"
+    },
+    "qstring-double": {
+      "name": "string.quoted.double.prototext",
+      "match": "\"(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^\"\\0\\n\\\\])*\""
+    },
+    "enum": {
+      "name": "entity.name.type.enum.proto",
+      "match": "(\\b[A-Z][a-zA-Z0-9_]*\\b)"
+    },
+    "numeric": {
+      "name": "constant.numeric.prototext",
+      "match": "[0-9]+"
+    }
+  },
+  "scopeName": "source.prototext"
+}

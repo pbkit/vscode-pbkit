@@ -24,6 +24,24 @@
           "Protocol Buffers"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "prototext",
+        "extensions": [
+          ".pbtxt",
+          ".pbtext",
+          ".txtpb",
+          ".textproto",
+          ".textpb",
+          ".asciipb",
+          ".pbascii",
+          ".protoascii",
+          ".prototxt"
+        ],
+        "aliases": [
+          "Protocol Buffers Text Format"
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -31,6 +49,11 @@
         "language": "proto",
         "scopeName": "source.proto",
         "path": "./syntaxes/proto.tmLanguage.json"
+      },
+      {
+        "language": "prototext",
+        "scopeName": "source.prototext",
+        "path": "./syntaxes/prototext.tmLanguage.json"
       }
     ],
     "commands": [
