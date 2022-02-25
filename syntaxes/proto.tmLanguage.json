@@ -51,6 +51,9 @@
       "contentName": "meta.syntax.value.proto",
       "patterns": [
         {
+          "include": "#qstring-single"
+        },
+        {
           "include": "#qstring-double"
         }
       ]
@@ -71,6 +74,9 @@
       },
       "contentName": "meta.import.value.proto",
       "patterns": [
+        {
+          "include": "#qstring-single"
+        },
         {
           "include": "#qstring-double"
         }
@@ -115,6 +121,9 @@
         }
       },
       "patterns": [
+        {
+          "include": "#qstring-single"
+        },
         {
           "include": "#qstring-double"
         },
@@ -302,20 +311,13 @@
         }
       ]
     },
+    "qstring-single": {
+      "name": "string.quoted.single.proto",
+      "match": "'(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^'\\0\\n\\\\])*'"
+    },
     "qstring-double": {
       "name": "string.quoted.double.proto",
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.proto"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.proto"
-        }
-      }
+      "match": "\"(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^\"\\0\\n\\\\])*\""
     },
     "boolean": {
       "name": "constant.language.boolean.proto",
@@ -408,6 +410,9 @@
         {
           "name": "keyword.operator.range.proto",
           "match": "to"
+        },
+        {
+          "include": "#qstring-single"
         },
         {
           "include": "#qstring-double"
