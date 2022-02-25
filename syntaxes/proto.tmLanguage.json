@@ -51,6 +51,9 @@
       "contentName": "meta.syntax.value.proto",
       "patterns": [
         {
+          "include": "#qstring-single"
+        },
+        {
           "include": "#qstring-double"
         }
       ]
@@ -71,6 +74,9 @@
       },
       "contentName": "meta.import.value.proto",
       "patterns": [
+        {
+          "include": "#qstring-single"
+        },
         {
           "include": "#qstring-double"
         }
@@ -115,6 +121,9 @@
         }
       },
       "patterns": [
+        {
+          "include": "#qstring-single"
+        },
         {
           "include": "#qstring-double"
         },
@@ -302,20 +311,13 @@
         }
       ]
     },
+    "qstring-single": {
+      "name": "string.quoted.single.proto",
+      "match": "'(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^'\\0\\n\\\\])*'"
+    },
     "qstring-double": {
       "name": "string.quoted.double.proto",
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.proto"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.proto"
-        }
-      }
+      "match": "\"(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^\"\\0\\n\\\\])*\""
     },
     "boolean": {
       "name": "constant.language.boolean.proto",
@@ -352,7 +354,7 @@
     },
     "field-statement": {
       "name": "statement.field.proto",
-      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
+      "begin": "\\b(required|optional|repeated)?\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+)|(?:(map)\\s*(<)\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s*(,)\\s*(?:(double|string|(?:(?:(?:(?:u|s)?int)|s?fixed)(?:32|64))|bool|bytes)|([a-zA-Z0-9\\-\\_\\.]+))\\s*(>)))\\s+([a-zA-Z0-9\\-\\_]+)\\s*(=)\\s*([0-9]+)\\s*",
       "beginCaptures": {
         "1": {
           "name": "keyword.field.type.proto"
@@ -364,12 +366,36 @@
           "name": "entity.name.type.field.proto"
         },
         "4": {
-          "name": "variable.name.field.proto"
+          "name": "keyword.map.proto"
         },
         "5": {
-          "name": "punctuation.separator.key-value.proto"
+          "name": "punctuation.start.map.proto"
         },
         "6": {
+          "name": "support.type.field.proto"
+        },
+        "7": {
+          "name": "entity.name.type.field.proto"
+        },
+        "8": {
+          "name": "punctuation.separator.map.proto"
+        },
+        "9": {
+          "name": "support.type.field.proto"
+        },
+        "10": {
+          "name": "entity.name.type.field.proto"
+        },
+        "11": {
+          "name": "punctuation.end.map.proto"
+        },
+        "12": {
+          "name": "variable.name.field.proto"
+        },
+        "13": {
+          "name": "punctuation.separator.key-value.proto"
+        },
+        "14": {
           "name": "constant.numeric.proto"
         }
       },
@@ -408,6 +434,9 @@
         {
           "name": "keyword.operator.range.proto",
           "match": "to"
+        },
+        {
+          "include": "#qstring-single"
         },
         {
           "include": "#qstring-double"
