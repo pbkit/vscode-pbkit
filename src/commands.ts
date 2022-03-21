@@ -1,12 +1,12 @@
+import path from 'path';
 import * as vscode from "vscode";
-import { LanguageClient, ServerOptions } from "vscode-languageclient/node";
+import { LanguageClient, ServerOptions, TransportKind } from "vscode-languageclient/node";
 import {
   ENABLEMENT_FLAG,
   LANGUAGE_CLIENT_ID,
   LANGUAGE_CLIENT_NAME,
 } from "./constants";
 import { PbkitExtensionContext } from "./types";
-import { getPbCommand } from "./utils";
 
 export type Callback = (...args: any[]) => unknown;
 export type Factory = (
@@ -28,23 +28,19 @@ export function startLanguageServer(
       vscode.commands.executeCommand("setContext", ENABLEMENT_FLAG, false);
       await client.stop();
     }
-    const command = await getPbCommand();
+    
     const serverOptions: ServerOptions = {
       run: {
-        command,
+        module: context.asAbsolutePath(path.join('node_modules', '@pbkit', 'pb-cli', 'esm', 'cli', 'pb', 'entrypoint.js')),
+        transport: TransportKind.stdio,
         args: ["lsp"],
-        options: {
-          env: { ...process.env, "NO_COLOR": true },
-        },
       },
       debug: {
-        command,
+        module: context.asAbsolutePath(path.join('node_modules', '@pbkit', 'pb-cli', 'esm', 'cli', 'pb', 'entrypoint.js')),
+        transport: TransportKind.stdio,
         args: ["lsp"],
-        options: {
-          env: { ...process.env, "NO_COLOR": true },
-        },
-      },
-    };
+      }
+    }
     const client = new LanguageClient(
       LANGUAGE_CLIENT_ID,
       LANGUAGE_CLIENT_NAME,

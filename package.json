@@ -65,22 +65,22 @@
       }
     ],
     "configuration": {
-			"type": "object",
-			"title": "Example configuration",
-			"properties": {
-				"pbkit-language-server.trace.server": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "verbose",
-					"description": "Traces the communication between VS Code and the language server."
-				}
-			}
-		}
+      "type": "object",
+      "title": "pbkit",
+      "properties": {
+        "pbkit-language-server.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    }
   },
   "scripts": {
     "build": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node"
@@ -92,6 +92,7 @@
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
+    "@pbkit/pb-cli": "^0.0.40",
     "vscode-languageclient": "^7.0.0"
   }
 }
