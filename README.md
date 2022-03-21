@@ -1,10 +1,8 @@
 # VSCode Extension for Protobuf
 
-This extension adds support for using Protobuf with Visual Studio Code, powered by Protobuf language server.
-
-> ⚠️ This extension is still in development.
+This extension adds Protobuf support, powered by Pbkit language server.
 
 ## Features
-- Syntax highlighting for Protobuf
-- Supports Go to Definition. (TODO)
-- Auto completion for imports. (TODO)
+- Syntax highlighting
+- Go to Definition
+- Auto completion (TODO)
