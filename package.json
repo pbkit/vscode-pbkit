@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/pbkit/vscode-pbkit.git"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "pbkit",
   "icon": "pbkit.png",
   "license": "(MIT OR Apache-2.0)",
@@ -98,7 +98,7 @@
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
-    "@pbkit/pb-cli": "^0.0.40",
+    "@pbkit/pb-cli": "^0.0.41",
     "vscode-languageclient": "^7.0.0"
   }
 }
