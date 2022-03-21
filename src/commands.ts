@@ -31,7 +31,7 @@ export function startLanguageServer(
     
     const serverOptions: ServerOptions = {
       run: {
-        module: context.asAbsolutePath(path.join('node_modules', '@pbkit', 'pb-cli', 'esm', 'cli', 'pb', 'entrypoint.js')),
+        module: context.asAbsolutePath(path.join('dist', '@pbkit', 'pb-cli', 'esm', 'cli', 'pb', 'entrypoint.js')),
         transport: TransportKind.stdio,
         args: ["lsp"],
       },

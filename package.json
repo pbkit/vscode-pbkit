@@ -83,11 +83,13 @@
     }
   },
   "scripts": {
-    "build": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node"
+    "build:ext": "esbuild ./src/extension.ts --bundle --outfile=./dist/main.js --external:vscode --format=cjs --platform=node",
+    "build:pbkit": "esbuild ./node_modules/@pbkit/pb-cli/esm/cli/pb/entrypoint.js --bundle --outdir=./dist/@pbkit/pb-cli/esm/cli/pb --format=cjs --platform=node",
+    "build": "npm run build:ext && npm run build:pbkit"
   },
   "devDependencies": {
     "@types/node": "^17.0.17",
-    "@types/vscode": "^1.64.0",
+    "@types/vscode": "^1.51.0",
     "esbuild": "^0.14.21",
     "vscode-test": "^1.6.1"
   },
