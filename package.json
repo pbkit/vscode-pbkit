@@ -2,6 +2,10 @@
   "name": "vscode-pbkit",
   "displayName": "Protobuf (Protocol Buffers)",
   "description": "Syntax highlight, Go to definition and Auto completion.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbkit/vscode-pbkit.git"
+  },
   "version": "0.0.1",
   "publisher": "pbkit",
   "icon": "pbkit.png",
