@@ -275,6 +275,9 @@
           "include": "#comment"
         },
         {
+          "include": "#captured-options"
+        },
+        {
           "include": "#rpc-method"
         }
       ]
@@ -594,7 +597,7 @@
     },
     "rpc-method": {
       "name": "statement.rpc-method.proto",
-      "match": "\\b(rpc)\\s+([0-9a-zA-Z\\-\\_]+)\\s*(\\()\\s*([a-zA-Z0-9\\-\\_\\.]+)\\s*(\\))\\s*(returns)\\s*(\\()\\s*([a-zA-Z0-9\\-\\_\\.]+)\\s*(\\))\\s*(\\;)",
+      "match": "\\b(rpc)\\s+([0-9a-zA-Z\\-\\_]+)\\s*(\\()\\s*((stream\\s*)?[a-zA-Z0-9\\-\\_\\.]+)\\s*(\\))\\s*(returns)\\s*(\\()\\s*((stream\\s*)?[a-zA-Z0-9\\-\\_\\.]+)\\s*(\\))\\s*(\\;)?",
       "captures": {
         "1": {
           "name": "keyword.rpc.proto"
@@ -609,21 +612,37 @@
           "name": "entity.name.type.request.proto"
         },
         "5": {
-          "name": "punctuation.definition.parameters.end.proto"
+          "name": "keyword.rpc.type.proto"
         },
         "6": {
-          "name": "keyword.returns.proto"
+          "name": "punctuation.definition.parameters.end.proto"
         },
         "7": {
-          "name": "punctuation.definition.parameters.begin.proto"
+          "name": "keyword.returns.proto"
         },
         "8": {
-          "name": "entity.name.type.response.proto"
+          "name": "punctuation.definition.parameters.begin.proto"
         },
         "9": {
+          "name": "entity.name.type.response.proto"
+        },
+        "10": {
+          "name": "keyword.rpc.type.proto"
+        },
+        "11": {
           "name": "punctuation.definition.parameters.end.proto"
         }
       }
+    },
+    "captured-options": {
+      "name": "statement.captured-options.proto",
+      "begin": "{",
+      "end": "}",
+      "patterns": [
+        {
+          "include": "#option"
+        }
+      ]
     }
   },
   "scopeName": "source.proto"
