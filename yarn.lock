@@ -15,10 +15,10 @@
     "@deno/shim-deno-test" "^0.3.2"
     which "^2.0.2"
 
-"@pbkit/pb-cli@^0.0.50":
-  version "0.0.50"
-  resolved "https://registry.yarnpkg.com/@pbkit/pb-cli/-/pb-cli-0.0.50.tgz#7e6698cee5085792074241e344bf20c042733abe"
-  integrity sha512-pcWAMa1bqdISGDCIVTPesr+A4UYXpVryNbszAcRQrUCYkNOw+Aea8eMENi82SO5FvCdg+jZTg+j5lu8eHl/Zkw==
+"@pbkit/pb-cli@^0.0.51":
+  version "0.0.51"
+  resolved "https://registry.yarnpkg.com/@pbkit/pb-cli/-/pb-cli-0.0.51.tgz#2a6237a505ccfb569f39574ff72098e22ae1bbd0"
+  integrity sha512-W6cUg/bsojyZJcPFIr30YajFL8HojHK9/JyjmvIxuTs55VhYzhfq+7www9AbRNWj7B4u4k6G/aoW7PkpocgHVA==
   dependencies:
     "@deno/shim-deno" "~0.4.3"
     undici "^4.15.1"
