@@ -4,6 +4,9 @@
   "patterns": [
     {
       "include": "#dictionary"
+    },
+    {
+      "include": "#comment"
     }
   ],
   "repository": {
@@ -34,6 +37,17 @@
         },
         {
           "include": "#dictionary"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.prototext",
+          "match": "#.*"
         }
       ]
     },
@@ -73,6 +87,9 @@
         },
         {
           "include": "#enum"
+        },
+        {
+          "include": "#comment"
         }
       ]
     },
