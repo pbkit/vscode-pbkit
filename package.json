@@ -45,7 +45,7 @@
         "aliases": [
           "Protocol Buffers Text Format"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration-prototext.json"
       }
     ],
     "grammars": [
