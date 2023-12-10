@@ -6,12 +6,12 @@
     "type": "git",
     "url": "https://github.com/pbkit/vscode-pbkit.git"
   },
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "pbkit",
   "icon": "pbkit.png",
   "license": "(MIT OR Apache-2.0)",
   "engines": {
-    "vscode": "^1.51.0"
+    "vscode": "^1.85.0"
   },
   "activationEvents": [
     "onLanguage:proto"
@@ -88,18 +88,18 @@
   },
   "scripts": {
     "build:ext": "esbuild ./src/extension.ts --bundle --outfile=./dist/main.js --external:vscode --format=cjs --platform=node",
-    "build:pbkit": "esbuild ./node_modules/@pbkit/pb-cli/esm/cli/pb/entrypoint.js --bundle --outdir=./dist/@pbkit/pb-cli/esm/cli/pb --format=cjs --platform=node",
+    "build:pbkit": "esbuild ./node_modules/@pbkit/pb-cli/esm/cli/pb/entrypoint.js --bundle --outdir=./dist/@pbkit/pb-cli/esm/cli/pb --format=esm --banner:js='(async()=>{' --footer:js='})()' --define:import.meta.url=undefined --platform=node",
     "build": "npm run build:ext && npm run build:pbkit"
   },
   "devDependencies": {
-    "@types/node": "^17.0.17",
-    "@types/vscode": "^1.51.0",
-    "@vscode/vsce": "^2.20.1",
-    "esbuild": "^0.14.21",
+    "@types/node": "^20.10.4",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.9",
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
-    "@pbkit/pb-cli": "^0.0.51",
-    "vscode-languageclient": "^7.0.0"
+    "@pbkit/pb-cli": "^0.0.67",
+    "vscode-languageclient": "^9.0.1"
   }
 }

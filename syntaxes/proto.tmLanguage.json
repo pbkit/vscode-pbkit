@@ -6,6 +6,9 @@
       "include": "#syntax"
     },
     {
+      "include": "#edition"
+    },
+    {
       "include": "#import"
     },
     {
@@ -49,6 +52,33 @@
         }
       },
       "contentName": "meta.syntax.value.proto",
+      "patterns": [
+        {
+          "include": "#qstring-single"
+        },
+        {
+          "include": "#qstring-double"
+        }
+      ]
+    },
+    "edition": {
+      "name": "meta.edition.proto",
+      "begin": "\\b(edition)\\s*(=)\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.edition.proto"
+        },
+        "2": {
+          "name": "punctuation.separator.key-value.proto"
+        }
+      },
+      "end": "\\;",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.proto"
+        }
+      },
+      "contentName": "meta.edition.value.proto",
       "patterns": [
         {
           "include": "#qstring-single"
