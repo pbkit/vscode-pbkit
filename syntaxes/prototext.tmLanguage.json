@@ -6,6 +6,9 @@
       "include": "#dictionary"
     },
     {
+      "include": "#kv-pair"
+    },
+    {
       "include": "#comment"
     }
   ],
