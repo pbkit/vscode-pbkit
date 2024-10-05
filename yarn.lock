@@ -125,10 +125,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.19.9.tgz#b2da6219b603e3fa371a78f53f5361260d0c5585"
   integrity sha512-oxoQgglOP7RH6iasDrhY+R/3cHrfwIDvRlT4CGChflq6twk8iENeVvMJjmvBb94Ik1Z+93iGO27err7w6l54GQ==
 
-"@pbkit/pb-cli@^0.0.67":
-  version "0.0.67"
-  resolved "https://registry.yarnpkg.com/@pbkit/pb-cli/-/pb-cli-0.0.67.tgz#0e3078072af28f5c2023406fb97526def72097dd"
-  integrity sha512-ivCjvNAYEN1BOy7VfhS80s0a3nuyb0SlVM2sQ+McMdQNihR1tiEwzsRTS28yQfNrj3YaeYhorbWq/DltvHPFhg==
+"@pbkit/pb-cli@^0.0.72":
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/@pbkit/pb-cli/-/pb-cli-0.0.72.tgz#2edf6b154230a76f45b526957e86878cd5fcf59d"
+  integrity sha512-yu9Kaby03QxUgceEJyro4/DOMubv91aE3Yx0jx9luGgVxqo9mid3Bkt4kfaBovqDYU7FZ3sMF10pnJTDcOLsKg==
   dependencies:
     "@deno/shim-deno" "~0.17.0"
     jszip "3.5.0"

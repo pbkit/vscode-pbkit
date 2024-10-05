@@ -22,10 +22,10 @@ export function startLanguageServer(
   return async () => {
     console.log("Start Pbkit language server");
     if (extensionContext.client) {
-      const client = extensionContext.client;
-      extensionContext.client = undefined;
       vscode.commands.executeCommand("setContext", ENABLEMENT_FLAG, false);
-      await client.stop();
+      await extensionContext.client.restart();
+      vscode.commands.executeCommand("setContext", ENABLEMENT_FLAG, true);
+      return;
     }
     const client = new LanguageClient(
       LANGUAGE_CLIENT_ID,
@@ -33,9 +33,8 @@ export function startLanguageServer(
       await getServerOptions(context),
       extensionContext.clientOptions,
     );
-    context.subscriptions.push(client.start());
-    await client.onReady();
     extensionContext.client = client;
+    await client.start();
     vscode.commands.executeCommand("setContext", ENABLEMENT_FLAG, true);
   };
 }

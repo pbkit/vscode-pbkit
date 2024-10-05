@@ -6,11 +6,10 @@ import { ServerOptions, TransportKind } from "vscode-languageclient/node";
 type GetServerOptionsFn = (context: ExtensionContext) => Promise<ServerOptions>;
 
 export const getServerOptions: GetServerOptionsFn = async (context) => {
-  if (await commandExists("pb")) {
-    return await getDenoServerOptions(context);
-  } else {
-    return await getNodeServerOptions(context);
-  }
+  // if (await commandExists("pb")) {
+  //   return await getDenoServerOptions(context);
+  // }
+  return await getNodeServerOptions(context);
 };
 
 export const getDenoServerOptions: GetServerOptionsFn = async () => {
