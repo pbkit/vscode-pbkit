@@ -1,121 +1,306 @@
 {
-  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "Protocol Buffers Text Format",
+  "$schema": "https://json.schemastore.org/tmLanguage.json",
+  "name": "Protocol Buffer Text Format",
+  "scopeName": "source.textproto",
+  "fileTypes": [
+    "pbtxt",
+    "prototxt",
+    "textproto"
+  ],
+  "foldingStartMarker": "(\\{|\\[)\\s*$",
+  "foldingStopMarker": "^\\s*(\\}|\\])\\s*$",
   "patterns": [
     {
-      "include": "#dictionary"
+      "include": "#comments"
     },
     {
-      "include": "#kv-pair"
+      "include": "#string-single"
     },
     {
-      "include": "#comment"
+      "include": "#string-double"
+    },
+    {
+      "include": "#key"
+    },
+    {
+      "include": "#optional-key"
+    },
+    {
+      "include": "#field"
     }
   ],
   "repository": {
-    "dictionary": {
-      "name": "meta.dictionary.prototext",
-      "begin": "\\b(?:([a-zA-Z]+[a-zA-Z0-9_]*)|([0-9]+))\\s*({)",
+    "array": {
+      "begin": "\\[",
       "beginCaptures": {
-        "1": {
-          "name": "support.type.prototext"
+        "0": {
+          "name": "punctuation.definition.array.begin.textproto"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.array.end.textproto"
+        }
+      },
+      "name": "meta.structure.array.textproto",
+      "patterns": [
+        {
+          "include": "#comments"
         },
-        "2": {
-          "name": "support.type.prototext"
+        {
+          "include": "#value"
         },
-        "3": {
-          "name": "punctuation.separator.key-value.prototext"
+        {
+          "match": ",",
+          "name": "punctuation.separator.array.textproto"
+        },
+        {
+          "match": "[^\\s\\]]",
+          "name": "invalid.illegal.expected-array-separator.textproto"
+        }
+      ]
+    },
+    "object": {
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.dictionary.begin.textproto"
         }
       },
       "end": "\\}",
       "endCaptures": {
         "0": {
-          "name": "punctuation.terminator.prototext"
+          "name": "punctuation.definition.dictionary.end.textproto"
         }
       },
-      "contentName": "meta.syntax.value.prototext",
+      "name": "meta.structure.dictionary.textproto",
       "patterns": [
         {
-          "include": "#kv-pair"
+          "include": "#comments"
         },
         {
-          "include": "#dictionary"
+          "include": "#string-single"
         },
         {
-          "include": "#comment"
+          "include": "#string-double"
+        },
+        {
+          "include": "#key"
+        },
+        {
+          "include": "#optional-key"
+        },
+        {
+          "include": "#field"
         }
       ]
     },
-    "comment": {
-      "patterns": [
-        {
-          "name": "comment.line.number-sign.prototext",
-          "match": "#.*"
-        }
-      ]
-    },
-    "kv-pair": {
-      "name": "meta.dictionary.pair.prototext",
-      "begin": "\\b(?:([a-zA-Z]+[a-zA-Z0-9_]*)|([0-9]+))\\s*(:)\\s*",
+    "comments": {
+      "begin": "(^\\s+)?(?=#)",
       "beginCaptures": {
         "1": {
-          "name": "keyword.syntax.prototext"
+          "name": "punctuation.whitespace.comment.leading.textproto"
+        }
+      },
+      "end": "(?!\\G)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.trailing.textproto"
+        }
+      },
+      "patterns": [
+        {
+          "begin": "#",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.textproto"
+            }
+          },
+          "end": "$",
+          "name": "comment.line.number-sign.textproto"
+        }
+      ]
+    },
+    "constant": {
+      "patterns": [
+        {
+          "match": "\\b(?:true|false|null|Infinity|NaN)\\b",
+          "name": "constant.language.textproto"
+        },
+        {
+          "match": "\\b[A-Z]+[A-Z0-9]*(?:_[A-Z0-9]+)*\\b",
+          "name": "variable.other.readonly.textproto"
+        }
+      ]
+    },
+    "heredoc": {
+      "begin": "(<<)\\s*([_a-zA-Z]+)\\s*$",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.operator.heredoc.textproto"
         },
         "2": {
-          "name": "keyword.syntax.prototext"
+          "name": "keyword.control.heredoc-token.textproto"
+        }
+      },
+      "end": "^\\s*(\\2)\\s*$",
+      "endCaptures": {
+        "1": {
+          "name": "keyword.control.heredoc-token.textproto"
+        }
+      },
+      "name": "string.unquoted.heredoc.no-indent.textproto"
+    },
+    "infinity": {
+      "match": "(-)*\\b(?:Infinity|NaN)\\b",
+      "name": "constant.language.textproto"
+    },
+    "number": {
+      "patterns": [
+        {
+          "comment": "handles hexadecimal numbers",
+          "match": "(0x)[0-9a-fA-f]*",
+          "name": "constant.numeric.hex.textproto"
         },
-        "3": {
-          "name": "punctuation.separator.key-value.prototext"
+        {
+          "comment": "handles integer and decimal numbers",
+          "match": "[+-.]?(?=[1-9]|0(?!\\d))\\d+(\\.\\d+)?([eE][+-]?\\d+)?",
+          "name": "constant.numeric.textproto"
+        }
+      ]
+    },
+    "string-double": {
+      "begin": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.textproto"
+        }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.textproto"
+        }
+      },
+      "name": "string.quoted.double.textproto",
+      "patterns": [
+        {
+          "match": "(?x:\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4}))",
+          "name": "constant.character.escape.textproto"
+        },
+        {
+          "match": "\\\\.",
+          "name": "invalid.illegal.unrecognized-string-escape.textproto"
+        }
+      ]
+    },
+    "string-single": {
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.textproto"
+        }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.textproto"
+        }
+      },
+      "name": "string.quoted.single.textproto",
+      "patterns": [
+        {
+          "match": "(?x:\\\\(?:[\\'\\\\/bfnrt]|u[0-9a-fA-F]{4}))",
+          "name": "constant.character.escape.textproto"
+        },
+        {
+          "match": "\\\\.",
+          "name": "invalid.illegal.unrecognized-string-escape.textproto"
+        }
+      ]
+    },
+    "key": {
+      "begin": "[a-zA-Z0-9_\\.-]+(\\s+)",
+      "beginCaptures": {
+        "0": {
+          "name": "entity.name.textproto meta.structure.dictionary.value.textproto"
+        },
+        "1": {
+          "name": "punctuation.separator.dictionary.key-value.textproto"
         }
       },
       "end": "\\n",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.terminator.prototext"
-        }
-      },
-      "contentName": "meta.syntax.value.prototext",
+      "name": "support.type.property-name.textproto",
       "patterns": [
-        {          
-          "include": "#qstring-single"
-        },
         {
-          "include": "#qstring-double"
-        },
-        {
-          "include": "#numeric"
-        },
-        {
-          "include": "#boolean"
-        },
-        {
-          "include": "#enum"
-        },
-        {
-          "include": "#comment"
+          "include": "#value"
         }
       ]
     },
-    "boolean": {
-      "name": "constant.language.boolean.prototext",
-      "match": "(true)|(false)"
+    "optional-key": {
+      "begin": "\\[[a-zA-Z0-9_\\.-]+\\](\\s+)",
+      "beginCaptures": {
+        "0": {
+          "name": "entity.name.textproto meta.structure.dictionary.value.textproto"
+        },
+        "1": {
+          "name": "punctuation.separator.dictionary.key-value.textproto"
+        }
+      },
+      "end": "\\n",
+      "name": "support.type.property-name.textproto",
+      "patterns": [
+        {
+          "include": "#value"
+        }
+      ]
     },
-    "qstring-single": {
-      "name": "string.quoted.single.prototext",
-      "match": "'(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^'\\0\\n\\\\])*'"
+    "field": {
+      "begin": "\\[?[a-zA-Z0-9_\\.-]+\\]?(:)",
+      "beginCaptures": {
+        "0": {
+          "name": "variable.textproto meta.structure.dictionary.value.textproto"
+        },
+        "1": {
+          "name": "punctuation.separator.dictionary.key-value.textproto"
+        }
+      },
+      "end": "\\n",
+      "name": "support.type.property-name.textproto",
+      "patterns": [
+        {
+          "include": "#value"
+        }
+      ]
     },
-    "qstring-double": {
-      "name": "string.quoted.double.prototext",
-      "match": "\"(?:\\\\x[0-9a-f]{2}|\\\\[0-7]{3}|\\\\[0-7]|\\\\[abfnrtv\\\\\\?'\"]|[^\"\\0\\n\\\\])*\""
-    },
-    "enum": {
-      "name": "entity.name.type.enum.proto",
-      "match": "(\\b[A-Z][a-zA-Z0-9_]*\\b)"
-    },
-    "numeric": {
-      "name": "constant.numeric.prototext",
-      "match": "[0-9]+"
+    "value": {
+      "patterns": [
+        {
+          "include": "#constant"
+        },
+        {
+          "include": "#infinity"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#string-double"
+        },
+        {
+          "include": "#string-single"
+        },
+        {
+          "include": "#heredoc"
+        },
+        {
+          "include": "#array"
+        },
+        {
+          "include": "#object"
+        }
+      ]
     }
-  },
-  "scopeName": "source.prototext"
+  }
 }
